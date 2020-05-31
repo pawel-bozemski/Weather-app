@@ -28,7 +28,6 @@
     "start": "run-p start:* ",
     "start-silent": "run-p start > /dev/null",
     "start:react": "react-scripts start",
-    "start-and-test": "run-p start-silent test ",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
   },
@@ -39,7 +38,6 @@
   },
   "lint-staged": {
     "src/**/*.js": [
-      "yarn test-related --",
       "eslint"
     ]
   },

@@ -1,10 +1,10 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 /* selectors */
-export const getAll = ({ products }) => products.data;
+export const getWeather = ({ weather }) => weather.data;
 
 /* action name creator */
-const reducerName = 'products';
+const reducerName = 'weather';
 const createActionName = (name) => `app/${reducerName}/${name}`;
 
 /* action types */
@@ -19,6 +19,26 @@ export const fetchError = (payload) => ({ payload, type: FETCH_ERROR });
 
 /* thunk creators */
 
+export const getWeatherFromAPI = (city) => {
+  return (dispatch) => {
+    dispatch(fetchStarted());
+    navigator.geolocation.getCurrentPosition(function(location) {
+      const lat = (location.coords.latitude);
+      const long =(location.coords.longitude);
+      axios
+        .get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=64ef10d9a7da99341751092312b66683`)
+        .then(res => {
+          dispatch(fetchSuccess(res.data));
+          console.log('data', res.data);
+        })
+        .catch(err => {
+          dispatch(fetchError(err.message || true));
+        });
+
+    });
+
+  };
+};
 
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
