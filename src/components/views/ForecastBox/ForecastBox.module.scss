@@ -1,0 +1,12 @@
+@import '../../../styles/settings.scss';
+
+.root {
+  .table {
+    display: flex;
+    justify-content: space-between;
+    .tableCell {
+      width: 45px;
+      height: 50px;
+    }
+  }
+}

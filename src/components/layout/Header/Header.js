@@ -15,7 +15,7 @@ const Component = ({ className }) => (
         </Button>
         <div className={styles.menu}>
           <Button href="/" color="inherit">Home</Button>
-          <Button href="/contact" color="inherit">Contact</Button>
+          <Button href="/forecast" color="inherit">7 days forecast</Button>
         </div>
       </Toolbar>
     </AppBar>

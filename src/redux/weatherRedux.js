@@ -19,7 +19,7 @@ export const fetchError = (payload) => ({ payload, type: FETCH_ERROR });
 
 /* thunk creators */
 
-export const getWeatherFromAPI = (city) => {
+export const getCurrentWeather = () => {
   return (dispatch) => {
     dispatch(fetchStarted());
     navigator.geolocation.getCurrentPosition(function(location) {
@@ -33,11 +33,28 @@ export const getWeatherFromAPI = (city) => {
         .catch(err => {
           dispatch(fetchError(err.message || true));
         });
-
     });
-
   };
 };
+
+export const getForecastWeather = () => {
+  return (dispatch) => {
+    dispatch(fetchStarted());
+    navigator.geolocation.getCurrentPosition(function(location) {
+      const lat = (location.coords.latitude);
+      const long =(location.coords.longitude);
+      axios
+        .get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=current,minutely,hourly&appid=64ef10d9a7da99341751092312b66683&units=metric`)
+        .then(res => {
+          dispatch(fetchSuccess(res.data.daily));
+        })
+        .catch(err => {
+          dispatch(fetchError(err.message || true));
+        });
+    });
+  };
+};
+
 
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
@@ -53,7 +70,6 @@ export const reducer = (statePart = [], action = {}) => {
     }
     case FETCH_SUCCESS: {
       return {
-        ...statePart,
         data: action.payload,
         loading: {
           active: false,
