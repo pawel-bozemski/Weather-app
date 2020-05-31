@@ -26,10 +26,9 @@ export const getWeatherFromAPI = (city) => {
       const lat = (location.coords.latitude);
       const long =(location.coords.longitude);
       axios
-        .get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=64ef10d9a7da99341751092312b66683`)
+        .get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=64ef10d9a7da99341751092312b66683&units=metric`)
         .then(res => {
           dispatch(fetchSuccess(res.data));
-          console.log('data', res.data);
         })
         .catch(err => {
           dispatch(fetchError(err.message || true));

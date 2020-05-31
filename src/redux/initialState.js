@@ -1,6 +1,6 @@
 export const initialState = {
   weather: {
-    data: [],
+    data: {},
     loading: {
       active: false,
       error: false,
