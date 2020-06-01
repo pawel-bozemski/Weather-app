@@ -11,8 +11,8 @@ import styles from './ForecastBox.module.scss';
 
 const Component = ({className, temp, weather, feels_like, pressure, humidity, wind_speed, rain, dt}) =>  {
   const date = new Date(dt * 1000);
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
+  const day = ('0' + date.getDate()).slice(-2);
+  const month = ('0' + (date.getMonth() + 1)).slice(-2);
   const showDate = day + '.' + month;
   return (
     <div className={clsx(className, styles.root)}>

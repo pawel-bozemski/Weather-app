@@ -7,6 +7,8 @@ import { MainLayout } from './components/layout/MainLayout/MainLayout';
 import { Homepage } from './components/views/Homepage/Homepage';
 import { NotFound } from './components/views/NotFound/NotFound';
 import { Forecast } from './components/views/Forecast/Forecast';
+import { CityWeather } from './components/views/CityWeather/CityWeather';
+
 
 const App = () => (
   <Provider store={store}>
@@ -15,6 +17,7 @@ const App = () => (
         <Switch>
           <Route exact path='/' component={Homepage} />
           <Route exact path='/forecast' component={Forecast} />
+          <Route exact path='/cityweather' component={CityWeather} />
           <Route path='*' component={NotFound} />
         </Switch>
       </MainLayout>

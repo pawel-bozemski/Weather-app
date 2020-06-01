@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
 import { getWeather, getCurrentWeather } from '../../../redux/weatherRedux.js';
-import styles from './Homepage.module.scss';
+import styles from './CityWeather.module.scss';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -118,6 +118,6 @@ const mapDispatchToProps = dispatch => ({
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  Container as Homepage,
-  Component as HomepageComponent,
+  Container as CityWeather,
+  Component as CityWeatherComponent,
 };
