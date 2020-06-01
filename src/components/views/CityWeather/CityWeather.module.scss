@@ -1,6 +1,11 @@
 @import '../../../styles/settings.scss';
 
 .root {
+  .form {
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+  }
   .header {
     text-align: center;
   }

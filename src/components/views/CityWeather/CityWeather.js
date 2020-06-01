@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
-import { getWeather, getCurrentWeather } from '../../../redux/weatherRedux.js';
+import { getWeather, getCurrentWeatherCity } from '../../../redux/weatherRedux.js';
 import styles from './CityWeather.module.scss';
 
 import Table from '@material-ui/core/Table';
@@ -12,16 +12,33 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 class Component extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      city: '',
+    };
+  }
 
   componentDidMount() {
     const { fetchWeather } = this.props;
-    fetchWeather();
+    fetchWeather('Lublin');
+  }
+
+  handleSearch = () =>{
+    this.props.fetchWeather(this.state.city);
+  }
+
+  handleChange = (e) =>{
+    this.setState({ city : e.target.value });
   }
 
   render() {
     const {className, weather } = this.props;
+    const { handleChange, handleSearch } = this;
 
     const sunriseStamp = weather.sys && weather.sys.sunrise;
     const sunrise = new Date(sunriseStamp * 1000);
@@ -43,6 +60,26 @@ class Component extends React.Component {
     return(
       <div className={clsx(className, styles.root)}>
         <div>
+          <form
+            className={styles.form}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="outlined-basic"
+              label="Type city e.g. Warsaw"
+              variant="outlined"
+              onChange={(e) => handleChange(e)}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSearch}
+            >
+              Search
+            </Button>
+
+          </form>
           <div className={styles.header}>
             <h2>Weather for
               {' '}
@@ -112,7 +149,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchWeather: ()  => dispatch(getCurrentWeather()),
+  fetchWeather: (city)  => dispatch(getCurrentWeatherCity(city)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

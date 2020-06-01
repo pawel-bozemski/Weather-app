@@ -36,7 +36,6 @@ export const getCurrentWeather = () => {
     });
   };
 };
-
 export const getForecastWeather = () => {
   return (dispatch) => {
     dispatch(fetchStarted());
@@ -54,6 +53,23 @@ export const getForecastWeather = () => {
     });
   };
 };
+// api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={your api key}
+
+export const getCurrentWeatherCity = (city) => {
+  return (dispatch) => {
+    dispatch(fetchStarted());
+    axios
+      .get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=64ef10d9a7da99341751092312b66683&units=metric`)
+      .then(res => {
+        dispatch(fetchSuccess(res.data));
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message || true));
+      });
+
+  };
+};
+
 
 
 /* reducer */
