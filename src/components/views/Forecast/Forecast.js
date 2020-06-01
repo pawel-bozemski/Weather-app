@@ -26,6 +26,12 @@ class Component extends React.Component {
 
     return(
       <div className={clsx(className, styles.root)}>
+        <div className={styles.header}>
+          <h2>
+            7 day weather forecast for your location
+          </h2>
+        </div>
+
         <TableContainer component={Paper}>
           <Table className={styles.table}>
             <TableHead>
